@@ -1,0 +1,396 @@
+{% extends 'base.html' %}
+
+<script>
+{% block jquery %}
+var endpoint = '/api/chart/data/'
+var defaultData = []
+var labels = [];
+$.ajax({
+    method: "GET",
+    url: endpoint,
+    success: function(data){
+        labels = data.labels
+        defaultData = data.default
+        var ctx = document.getElementById("myChart");
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '# Frequency',
+                    data: defaultData,
+                    backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                    }
+                  }]
+                }
+            }
+        })
+        setChart()
+    },
+    error: function(error_data){
+        console.log("error")
+        console.log(error_data)
+    }
+})
+
+
+{% endblock %}
+</script>
+
+{% block content %}
+
+<div class="container">
+  <h2>Text Analysis on the Unstructured data</h2>
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Frequent Words</a></li>
+    <li><a data-toggle="tab" href="#menu1">Summary</a></li>
+    <li><a data-toggle="tab" href="#menu2">Wordcloud</a></li>
+    <li><a data-toggle="tab" href="#menu3">NER</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+    	<div class='col-sm-12' url-endpoint='{% url "api-data" %}'>
+	        <h1>Frequent Words from the document</h1>
+	        <div class='col-sm-6'>
+	            <canvas id="myChart" width="400" height="400"></canvas>
+	        </div>
+    	</div>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <h3>Summary of the document</h3>
+      <p> The use of the WHO logo is not permitted. </p>
+<p> If you  adapt the work, then you must license your work under the same or equivalent Creative  Commons licence. </p>
+<p> The original English edition shall be the binding and authentic editionﬂ. </p>
+<p> Suggested citation. </p>
+<p> Cataloguing-in-Publication (CIP) data. </p>
+<p> CIP data are available at  http://apps.who.int/iris .Sales, rights and licensing. </p>
+<p> To purchase WHO publications, see  http://apps.who.int/ bookorders . </p>
+<p> To submit requests for commercial use and queries on rights and licensing, see  http://www.who.int/about/licensing .Third-party materials. </p>
+<p> General disclaimers. </p>
+<p> The responsibility for the interpretation  and use of the material lies with the reader. </p>
+<p> In no event shall WHO be liable for damages arising from its use. </p>
+<p> Southern  (Advisor to Medicines Regulator,   Simon™s Town, South Africa), and  Sheena G. Sullivan  (WHO Collaborating Centre  for Reference and Research on In˚uenza, Melbourne, Australia). </p>
+<p> 3Historically, in˚uenza immunization programmes have been implemented mainly   in high-income countries. </p>
+<p> The designs for such studies are described and   their advantages and limitations reviewed. </p>
+<p> In˚uenza disease is primarily caused by in˚uenza A and B viruses, which are spread   from person to person by respiratory droplets and fomites. </p>
+<p> 10 In temperate regions,  both in˚uenza A and B cause winter epidemics, with sporadic cases and outbreaks   occurring out of season. </p>
+<p> In tropical regions, circulation of in˚uenza viruses is more   complex, ranging from seasonal peaks similar to those in temperate regions, to two or   three annual incidence peaks, or to year-round virus circulation. </p>
+<p> 11 The in˚uenza virus genes that encode the viral surface proteins undergo rapid  genetic changes during viral replication. </p>
+<p> These accumulating genetic changes lead to  changes in the conformation of surface proteins, a process known as antigenic drift. </p>
+<p> In˚uenza A viruses may also undergo a more dramatic change known as antigenic   shift. </p>
+<p> In antigenic shift, virus strains emerge with novel surface antigens to which   population immunity is low or absent. </p>
+<p> Such viruses have the potential to cause   global pandemics. </p>
+<p> 2 Pregnant women also  have an increased risk of severe illness due to in˚uenza. </p>
+<p> Quadrivalent vaccines contain antigens of two   in˚uenza A strains and two B strains (Victoria and Yamagata lineages). </p>
+<p> 17 Formulation may differ for each hemisphere or remain the  same. </p>
+<p> Many different in˚uenza vaccine products are produced annually, by a number of  different manufacturers. </p>
+<p> These include trivalent inactivated vaccines, quadrivalent  inactivated vaccines, trivalent live attenuated vaccines, and quadrivalent live attenuated  vaccines. </p>
+<p> Inactivated vaccines may also be produced in high-dose formulations or adjuvanted   formulations. </p>
+<p> 19-21  In˚uenza viruses vary in transmissibility and virulence from season to season and   cause a wide range of adverse health outcomes. </p>
+<p> In˚uenza vaccines vary in degree of   antigenic match to circulating viruses, and in˚uenza VE can differ by age group, virus   type/subtype, vaccine product, health status of vaccinees, health outcomes under   study and the degree of antigenic match between vaccine and circulating viruses. </p>
+<p> 4 The guide is organized in the following sections: Section 2  describes the role of in˚uenza VE studies in implementing and evaluating  in˚uenza vaccination programmes. </p>
+<p> Section 6  reviews different designs that could be used for in˚uenza VE studies, and  the strengths and limitations of each. </p>
+<p> 6 For certain vaccines, these assessments  can include both the incidence of laboratory-con˜rmed outcomes, such as invasive   S. pneumoniae disease, and of non-speci˜c outcomes, such as hospitalizations for   pneumonia, with the difference in incidence attributed to the vaccination programme. </p>
+<p> 30  In  contrast, in˚uenza VE against laboratory-con˜rmed in˚uenza virus infection  is rarely higher than 60% and may sometimes be 30% or less, with protection   that may wane from one season to the next or within a season. </p>
+<p> If vaccine coverage data are   available by month, then more complicated modelling approaches are also possible. </p>
+<p> Then   ongoing VE studies are used as one input in models of outcomes averted by vaccination. </p>
+<p> 45 The I-MOVE network and the European Centre for  Disease Prevention and Control (ECDC) have useful websites with generic protocols,   research publications, and reviews. </p>
+<p> 46-49   Outcomes of interest for    disease or health event. </p>
+<p> All study subjects   should be at risk for the outcome, and the occurrence or non-occurrence of the outcome should be known for all subjects. </p>
+<p> Incorrectly determining the occurrence of the outcome  for a study subject. </p>
+<p> All persons enrolled in  a VE study. </p>
+<p> Outcomes, vaccine history, and   covariates should be measured on all study participants.A number of outcomes have been used for  in˚uenza VE studies, re˚ecting the range   of morbidity and mortality that in˚uenza   virus infection can cause and which may   be preventable by vaccination. </p>
+<p> Laboratory-con˜rmed in˚uenza illness is a highly   speci˜c in˚uenza outcome. </p>
+<p> Even during the peak of the in˚uenza season, the   non-speci˜c clinical syndrome of ﬁin˚uenza-like illnessﬂ (ILI) includes various   other respiratory pathogens that cause a similar syndrome against which   in˚uenza vaccine does not protect. </p>
+<p> i)       In˚uenza virus infection can cause severe illness and death through a number  of different  pathways and clinical syndromes. </p>
+<p> 52  In˚uenza can also  cause severe illness by exacerbating existing chronic disease such as asthma   or chronic obstructive pulmonary disease (COPD). </p>
+<p> For these patients, typical   in˚uenza disease signs such as fever may be absent. </p>
+<p> Furthermore, in˚uenza virus   infection can predispose individuals to secondary bacterial pneumonia. </p>
+<p> 53 Due to the variety of potential complications of  in˚uenza virus infections, it is dif˜cult to select outcomes for VE studies that   capture the range of in˚uenza-associated complications. </p>
+<p> ii)      Most of the clinical syndromes that in˚uenza virus infection may cause can  also be caused by other factors, including other respiratory pathogens. </p>
+<p> Severe  respiratory disease may be caused by in˚uenza, respiratory syncytial virus, and  adenovirus, among others. </p>
+<p> For example, the contribution of in˚uenza   to hospitalized pneumonia cases may range from <1% to 12% of such cases. </p>
+<p> 10The following are some clinical outcomes that could be used as endpoints for in˚uenza  VE studies:       Non-specific (i.e. </p>
+<p> syndromic) outcomes A. </p>
+<p> Severe acute respiratory infection The WHO Global Epidemiologic Surveillance Standards for In˚uenza de˜ne  SARI as an acute respiratory infection with history of fever or documented   fever of ˛38  oC, cough, onset within the last ten days, and requiring  hospitalization. </p>
+<p> 39  SARI offers several advantages as an outcome for in˚uenza  VE studies. </p>
+<p> Patients with SARI are by de˜nition hospitalized and typically   have severe illness. </p>
+<p> A two-year study in the  Philippines, for example, found that only 9% of SARI cases had laboratory- con˜rmed in˚uenza virus infection. </p>
+<p> those   with chronic heart disease). </p>
+<p> However, the   contribution of in˚uenza to pneumonia is low, and observable VE against   pneumonia will also be low. </p>
+<p> 11C. </p>
+<p> In˜uenza-like illness ILI is de˜ned by WHO as an acute respiratory infection with measured fever  of ˛38  oC, cough, and onset within the last seven days. </p>
+<p> 63 All- cause mortality is not recommended as an endpoint for VE studies. </p>
+<p> If maternal in˚uenza virus infection can cause poor birth   outcomes, then in˚uenza vaccination may prevent some of these adverse   outcomes. </p>
+<p> Maternal in˚uenza vaccination can also protect neonates and   young infants from in˚uenza virus infection. </p>
+<p> ii)       Confounding due to differences in risk of adverse outcomes between  vaccinated and unvaccinated women is a strong possibility. </p>
+<p> Women at   increased risk of preterm birth or other outcomes may be preferentially   offered or seek vaccination. </p>
+<p> when other causes of the   non-speci˜c outcome are more contributory). </p>
+<p> Laboratory-confirmed outcomes RT-PCR is the standard test for laboratory con˜rmation of in˚uenza virus  infection during acute illness. </p>
+<p> RT-PCR and other commercially available  molecular diagnostic tests are highly sensitive and highly speci˜c for detecting  in˚uenza viruses. </p>
+<p> Although other assays are available, including viral culture,  rapid antigen tests, and immuno˚uorescence, these are less sensitive than RT- 13PCR. </p>
+<p> Laboratory-con˜rmed outcomes are   much more speci˜c for in˚uenza virus infection than are outcomes based on   clinical signs and symptoms. </p>
+<p> All of these activities require training of clinical staff to ensure   standardized specimen collection and handling. </p>
+<p> Training of laboratory staff   is also required to ensure proper processing and testing of specimens. </p>
+<p> Improper   specimen handling or collection of inappropriate specimens can lead to false   negative results. </p>
+<p> The decision to assess potential study subjects for laboratory-con˜rmed  in˚uenza virus infection should not be based on clinicians™ decisions but on pre-  speci˜ed protocol guidelines. </p>
+<p> If the study will rely on clinical testing, the     characteristics are associated with clinical testing. </p>
+<p> What facility/facilities will be used for outpatient care? </p>
+<p> Where will cohort members be hospitalized for severe   illness? </p>
+<p> What proportion of outcomes may be missed due to seeking care outside of study facilities or self- treatment at home? </p>
+<p> What is the source population for the study hospitals or clinics? </p>
+<p> Either case may cause  systematic misclassi˜cation of the potential pool of study subjects. </p>
+<p> WHO recommends the use of laboratory-con˜rmed outcomes whenever   possible because of the bene˜ts associated with use of outcomes speci˜c for in˚uenza. </p>
+<p> Falsely classifying a vaccinated subject as unvaccinated, or falsely classifying an  unvaccinated subject as vaccinated, or falsely classifying person-time prior to vaccination as being post-vaccination.As part of an observational in˚uenza VE  study, each subject™s in˚uenza vaccination   history must be ascertained. </p>
+<p> For these children, it is desirable to document previous   in˚uenza vaccinations to determine whether they are fully or partially vaccinated. </p>
+<p> inactivated, live, adjuvanted, high-dose) used should be documented if possible,   ideally specifying actual product name. </p>
+<p> Most countries have some established infrastructure for administering   these vaccines and for keeping vaccination records, such as vaccination cards   kept by parents, although in˚uenza vaccine receipt is often not included in   vaccination cards in many low-income countries. </p>
+<p> Many of the persons at high   risk for in˚uenza-associated complications are adults. </p>
+<p> Vaccination cards are not  16usually given to adults, and without an established infrastructure, in˚uenza  vaccination may not be routinely recorded in clinic records, requiring reliance   on self-reporting. </p>
+<p> 69 Where available, these registries can greatly facilitate the  determination of the vaccination status of study subjects. </p>
+<p> However, registries  are not perfect. </p>
+<p> Even in high-income countries, data in vaccine registries are   generally only complete for registry items that are required for entry of a record   into the database (such as patient ID and vaccine name); items that are optional   generally have substantial missing data, and it is often these ˜elds that are of   interest to researchers. </p>
+<p> 71-75  Eliciting self-reported vaccine history from subjects involves  an interaction between subjects and research staff. </p>
+<p> Due to these limitations, WHO recommends against the   use of self-reported vaccination history as the sole source of vaccination data. </p>
+<p> If record-keeping related to in˚uenza vaccinations  can be designed with subsequent observational studies in mind, the likelihood of  successfully executing those observational studies will be much greater. </p>
+<p> If a proposed study is to rely on vaccination cards, pilot testing should assess the ability to review the cards  and the legibility and validity of the data on the cards. </p>
+<p> If a proposed study is to rely on self-reported vaccination history, pilot testing should validate self-reported  vaccinations relative to some external standard. </p>
+<p> The manner of exposure ascertainment and  the results of pilot testing should be reported to allow readers to put the VE results   into context and assess the strength of potential biases. </p>
+<p> Measuring covariates from true associations in the source  population. </p>
+<p> Bias resulting from differences in enrolling or in collecting data   on study subjects based on vaccination history or outcome status. </p>
+<p> Bias arising when exposure and outcome share a common cause that is not taken into account in analyses. </p>
+<p> Factors other than outcome and vaccination history that are measured  on all study subjects. </p>
+<p> Examples include age, sex, and comorbid illnesses. </p>
+<p> Covariates  and to control for confounding. </p>
+<p> by age   group. </p>
+<p> 68  Other groups of interest might  be pregnant women or persons with certain   comorbidities. </p>
+<p> The other main purpose for collecting  covariate data is to measure and control   for potential confounders, either in study   design (e.g. </p>
+<p> by matching) or in data analysis. </p>
+<p> The speci˜c covariates to include will depend on  the locale and context of a particular study. </p>
+<p> Age  is almost certainly a confounding factor, as both vaccine coverage and risk of  in˚uenza virus infection vary by age. </p>
+<p> In regions with tropical climates where in˚uenza may have multiple peaks,   it can be more dif˜cult to know when in˚uenza virus is not circulating widely. </p>
+<p> 20Time from symptom onset to specimen collection  may be associated with the  sensitivity or speci˜city of in˚uenza testing. </p>
+<p> These patients should be excluded from study enrolment. </p>
+<p> Receipt of other vaccines , such as pneumococcal vaccines, may be a marker for  care-seeking behaviour and/or propensity to seek in˚uenza vaccination. </p>
+<p> 77  Pilot studies on the association of underlying disease and receipt of vaccine will be   essential for identifying particular aspects of underlying disease to be measured. </p>
+<p> hospitalization). </p>
+<p> Some proxy measures, such as household crowding   or number of children in the household, may prove useful, as crowding may capture   both some degree of socioeconomic status and risk of in˚uenza virus infection. </p>
+<p> Distance to study hospital/clinic  may be correlated both with access to vaccination  and access to medical care. </p>
+<p> 21      geography, socioeconomics, comorbidity, pregnancy, and/or age? </p>
+<p> Access to medical care  will be population-dependent. </p>
+<p> 82 However, because these occur after the onset of the  outcome, they are not potential confounders and should not be included as covariates   in VE models. </p>
+<p> Study designs Observational VE studies use a variety of designs, including cohort designs, case- control designs, and pseudo-ecologic designs such as the screening method. </p>
+<p> A cohort study is perhaps the most familiar and intuitive observational study design. </p>
+<p> In a cohort VE study, subjects are ˜rst separated into vaccinated and unvaccinated   groups. </p>
+<p> Cohort studies have several advantages relative to other observational study designs. </p>
+<p> Due to the intuitive nature of the design, results of cohort studies can be relatively  easily communicated to policy-makers and other stakeholders. </p>
+<p> For prospective cohorts (where cohort members are identi˜ed prior to  vaccination), the research team must be able to identify which cohort members  may subsequently receive vaccine. </p>
+<p> ii)       Researchers must be able to identify the study outcomes in both the vaccinated  and unvaccinated cohorts. </p>
+<p> Careful thought must be  given to the selection of cohort sites to ensure that there is a high likelihood that  cohort members with the study outcome (such as hospitalization for laboratory-  con˜rmed in˚uenza virus infection) will be identi˜ed. </p>
+<p> iii)      As with all observational studies, cohort studies are susceptible to confounding  due to differences in vaccinated persons compared to unvaccinated persons. </p>
+<p> Most of the  outcomes of interest (such as hospitalization for laboratory-con˜rmed in˚uenza)   are relatively rare. </p>
+<p> For example, a study of monovalent in˚uenza A(H1Npdm VE   among health-care workers in Kenya 83 found that even with easily identi˜able  outcomes and exposures, cohort studies are still prone to biases due to differences   in health-care seeking between vaccinated and unvaccinated subjects. </p>
+<p> In a case- control design, researchers ˜rst identify individuals who experienced the outcome   of interest (cases), and a comparison group of individuals who did not experience the   outcome of interest (controls). </p>
+<p> Vaccination history is then determined for all cases   and controls, and the odds of vaccination in each group is calculated. </p>
+<p> Because subjects are not identi˜ed and enrolled on the basis   of vaccination status, case-control studies require investigators to determine   vaccination history retrospectively for all cases and controls after they have been  enrolled in the study. </p>
+<p> In the absence of registries or electronic medical records,  it can be dif˜cult to assess vaccination history accurately. </p>
+<p> Studies of in˚uenza   VE should not allow in˚uenza testing to be based on vaccination status. </p>
+<p> Ideally,   testing of clinical specimens for in˚uenza should be based on standardized case   de˜nitions and not on clinical decision-making which can introduce bias. </p>
+<p> If   clinician-based testing is used, absence of bias should be demonstrated. </p>
+<p> iii)      The choice of an appropriate control group is the greatest challenge in case-control  studies. </p>
+<p> The controls should be chosen so that the distribution of vaccination is   the same among the controls and in the population that gave rise to the cases. </p>
+<p> For instance, for a   case-control study in which cases are patients hospitalized for laboratory-  con˜rmed in˚uenza, what is an appropriate control group? </p>
+<p> One common   approach is to randomly select asymptomatic (and presumably disease-free)  25individuals from the community around the hospital. </p>
+<p> Care must be taken in selecting these   controls, however, because receipt of in˚uenza vaccine may be correlated with   receipt of other vaccines. </p>
+<p> Firstly, all cases and controls have  sought care at the same facilities. </p>
+<p> Similar data for test-negative designs for hospitalized   outcomes are much sparser. </p>
+<p> These underlying diseases also increase the risk of hospitalization   for respiratory symptoms. </p>
+<p> If the symptoms used to identify patients to be included in   a hospital-based study are too broad, the pool of non-cases could be biased towards   persons with acute exacerbations of chronic conditions, who may have a biased   distribution of in˚uenza vaccination relative to the cases. </p>
+<p> The screening method is a pseudo-ecologic design, which uses individual-level   data on vaccination history and other covariates from cases, and ecologic data on   vaccination coverage in the population from which the cases came. </p>
+<p> 86 The advantage of  the screening method is that it does not require detailed data collection on non-cases,   which saves cost relative to a case-control study. </p>
+<p> However, studies using the screening   method are fully dependent on accurate and valid data on vaccine coverage in the   source population. </p>
+<p> To   detect a VE of 30% (± when 50% of the population is vaccinated would require   1033 cases in a case-control study. </p>
+<p> If only 5% of the population is vaccinated, detecting   the same VE with the same precision would require 6881 cases. </p>
+<p> Several descriptive analyses are useful for characterizing the study participants. </p>
+<p> Bivariate descriptive statistics are used to assess the distribution of covariates  among the study participants. </p>
+<p> The bivariate  distributions are also useful for comparing the study participants with participants in  other in˚uenza VE studies, as differences in age or comorbidities may contribute to  different VE across populations. </p>
+<p> Adjusted odds ratios can also be calculated using logistic regression models. </p>
+<p> 89  Age,  for example, is associated both with vaccination and with risk of in˚uenza, and so   should be included  a priori . </p>
+<p> Beyond the variables selected  a priori , researchers should determine which measured  covariates are acting as confounders in the data. </p>
+<p> If the adjusted VE differs from the unadjusted VE by   more than a pre-determined percent, the covariate is considered to be a confounder   and will be included in ˜nal models. </p>
+<p> A common threshold is to include covariates   whose adjustment changes the crude odds ratio by 10% or more, but the threshold   is at the researchers™ discretion. </p>
+<p> For example, it would not be meaningful to pool data from a   hospital-based VE study with data from an outpatient-based study, as VE against   in˚uenza hospitalizations is unlikely to be the same as VE against outpatient   illness. </p>
+<p> ii)       The studies to be pooled must have similar data available on key covariates to  include in adjusted VE models. </p>
+<p> 92 Respiratory specimens (nasopharyngeal or oropharyngeal swabs or  nasopharyngeal washes) would be collected from all (or a random sample of) the   SARI patients. </p>
+<p> Vaccination history   could be validated through medical record review, vaccine registry data, or other   documentation. </p>
+<p> If   subjects are enrolled after they are no longer shedding in˚uenza virus, laboratory   testing will falsely classify them as in˚uenza-negative. </p>
+<p> A broad list of  inclusionary signs and symptoms may increase the probability that the case de˜nition  will capture persons hospitalized due to in˚uenza. </p>
+<p> However, a broad case de˜nition   also increases the contribution of other conditions to the SARI patient population. </p>
+<p> Test-negative studies of hospitalized patients that use broad case de˜nitions can  produce substantial differences in the prevalence of chronic conditions between cases  and non-cases. </p>
+<p> 58 If a  test-negative study is based on SARI surveillance that does not use the WHO SARI  case de˜nition, the study participants should be restricted to SARI patients who have   evidence of an acute infection and not some underlying chronic cause. </p>
+<p> Is laboratory testing based on a physician™s clinical   decision-making, or is it based on the use of case de˜nitions by surveillance staff? </p>
+<p> Even if physicians™ decisions are   not based explicitly on vaccine history, clinical testing decisions are based on many   factors that could exert subtle biases in a test-negative study. </p>
+<p> To avoid biases and sub-optimal populations for testing, the decisions on   testing for SARI surveillance should be made by surveillance personnel and based on   pre-de˜ned case de˜nitions. </p>
+<p> If subjects are recruited outside of an in˚uenza season, they will almost invariably   test negative for in˚uenza and be treated as non-cases. </p>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <h3>Wordcloud displaying the frequent words used in the file</h3>
+      	<img src="/home/ubuntu/Django-Chart.js/src/templates/PAC_DataFlow_Diagram.jpeg">	
+    </div>
+    <div id="menu3" class="tab-pane fade">
+      <h3>Names, Organizations and Locations</h3>
+      <h4>Names</h4>
+        <p> Michael L. Jackson </p>
+		<p> Alicia M. Fry </p>
+		<p> Mark A. Katz </p>
+		<p> Carlos Lara </p>
+		<p> Danuta M. Skowronski </p>
+		<p> John C. Victor </p>
+		<p> Jon S. Abramson </p>
+		<p> Ben Cowling </p>
+		<p> Nathalie El Omeiri </p>
+		<p> Jill M. Ferdinands </p>
+		<p> Alan R. Hinman </p>
+		<p> Terri B. Hyde </p>
+		<p> Peter B. McIntyre </p>
+		<p> Jozef J. P. Nauta </p>
+		<p> Wilfred Ndifon </p>
+		<p> S. I. Samson </p>
+		<p> James </p>
+		<p> Simon </p>
+		<p> Sheena G. Sullivan </p>
+		<p> Justin R. Ortiz </p>
+		<p> Thomas Cherian </p>
+		<p> Adam L. Cohen </p>
+		<p> Joachim Hombach </p>
+		<p> Ole Wichmann </p>
+	  <h4>Organizations</h4>
+	  	<p> World Health Organization </p>
+		<p> World Intellectual Property Organization </p>
+		<p> World Health Organization </p>
+		<p> CIP </p>
+		<p> Vaccine Research </p>
+		<p> WHO Department of Immunization </p>
+		<p> Group Health Research Institute </p>
+		<p> Centers for Disease Control and Prevention </p>
+		<p> Ben Gurion University </p>
+		<p> Negev </p>
+		<p> University of Antwerp </p>
+		<p> British Columbia Centre for Disease Control </p>
+		<p> Dipika Sur </p>
+		<p> Medical Research Council Unit </p>
+		<p> ACOG Immunization Expert Work Group </p>
+		<p> American College of Obstetricians </p>
+		<p> NC </p>
+		<p> SAR </p>
+		<p> Pan American Health Organization\World Health Organization </p>
+		<p> Centers for Disease Control and Prevention </p>
+		<p> Guangzhou Center for Disease Control and Prevention </p>
+		<p> Centers for Disease Control and Prevention </p>
+		<p> National Centre for Immunisation Research and Surveillance of Vaccine Preventable Diseases </p>
+		<p> University of Sydney </p>
+		<p> Abbott EPD </p>
+		<p> African Institute for Mathematical Sciences </p>
+		<p> Medicines Regulator </p>
+		<p> Collaborating Centre for Reference and Research </p>
+		<p> Vaccine Research </p>
+		<p> US Centers for Disease Control </p>
+		<p> Vaccine Research </p>
+		<p> STROBE VEWHOAdvisory Committee </p>
+		<p> Disease Control </p>
+		<p> Immunizationinfluenza Complications Alert Network </p>
+		<p> Sentinel Practitioner Surveillance </p>
+		<p> ACIP </p>
+		<p> Canadian Sentinel Practitioner Surveillance Network </p>
+		<p> Pan American Health Organization </p>
+		<p> European Medicines Agency </p>
+		<p> European Centre for Disease Prevention and Control </p>
+		<p> WHO Global Epidemiologic Surveillance Standards </p>
+		<p> SARI </p>
+		<p> SARI </p>
+	  <h4>Locations</h4>
+	  	<p> Geneva </p>
+		<p> Seattle </p>
+		<p> Atlanta </p>
+		<p> GA </p>
+		<p> Israel </p>
+		<p> Antwerp </p>
+		<p> Belgium </p>
+		<p> Vancouver </p>
+		<p> Canada </p>
+		<p> Delhi </p>
+		<p> India </p>
+		<p> Seattle </p>
+		<p> WA </p>
+		<p> Gambia </p>
+		<p> Washington </p>
+		<p> DC </p>
+		<p> Winston-Salem </p>
+		<p> Hong Kong </p>
+		<p> Hong Kong </p>
+		<p> China </p>
+		<p> Lyon </p>
+		<p> France </p>
+		<p> Washington </p>
+		<p> Atlanta </p>
+		<p> GA </p>
+		<p> Guangzhou </p>
+		<p> China </p>
+		<p> Decatur </p>
+		<p> Atlanta </p>
+		<p> GA </p>
+		<p> New South Wales </p>
+		<p> Australia </p>
+		<p> Weesp </p>
+		<p> Netherlands </p>
+		<p> Cape Town </p>
+		<p> South Africa </p>
+		<p> Lyon </p>
+		<p> France </p>
+		<p> South Africa </p>
+		<p> Melbourne </p>
+		<p> Australia </p>
+		<p> United States </p>
+		<p> United States </p>
+		<p> Latin </p>
+		<p> Victoria </p>
+		<p> Yamagata </p>
+		<p> United States </p>
+		<p> United States </p>
+		<p> Philippines </p>
+    </div>
+  
+</div>
+{% endblock %}
